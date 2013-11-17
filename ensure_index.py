@@ -24,8 +24,8 @@
 import os
 import sqlite3
 
-root_dir = "/Users/zc/n2200/Movie"
-maxdept = 2
+from config import root_dir, maxdept, db_name
+
 
 films = []
 def ensure_index():
@@ -56,7 +56,7 @@ def find_dir(rootDir, level = 1):
 
 def into_db(data):
     "存入sqlite"
-    conn = sqlite3.connect("moga.db")
+    conn = sqlite3.connect(db_name)
     conn.text_factory = str
     c = conn.cursor()
     rowcount = 0

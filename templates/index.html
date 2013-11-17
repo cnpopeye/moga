@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>名称</th>
+						<th>大小</th>
+						<th>标签</th>
+					</tr>
+				</thead>
+				<tbody>
+    {% for f in films %}
+					<tr>
+						<td>{{f.id}}</td>
+						<td>{{f.film_name}}</td>
+						<td>0</td>
+						<td>{{f.tags}}</td>
+					</tr>
+  {% else %}
+    <li><em>Unbelievable.  No film here so far</em>
+  {% endfor %}
+
+				</tbody>
+			</table>
+			<ul class="pagination">
+				<li><a href="#">Prev</a></li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#">Next</a></li>
+			</ul>
+{% endblock %}
