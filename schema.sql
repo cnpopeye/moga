@@ -5,5 +5,7 @@ create table films(
        full_path text not null, 
        intro_md text, 
        intro_jpg text, 
+       folder text,
+       file_size text,
        tags text
 );

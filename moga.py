@@ -23,6 +23,7 @@
 import os
 import sqlite3
 import sys
+import imghdr
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -110,9 +111,9 @@ def into_db(data):
     return rowcount
 
 
-@app.route('/ensureindex')
-def ensure_index():
-    "建立film 索引数据"
+@app.route('/scan')
+def scan():
+    "scan film 数据"
     global films
     films = []
     find_dir(app.config['ROOT_DIR'])
@@ -128,6 +129,25 @@ def show_films():
     cur = db.execute('select id, film_name, tags from films')
     films = cur.fetchall()
     return render_template('index.html', films = films)
+
+@app.route('/gallery/', defaults={'path': ""})
+@app.route('/gallery/<path:path>')
+def show_gallery(path):
+    root_dir = "/Volumes/data0/Photos/"
+    files = os.listdir(root_dir+path)
+    folders=[]
+    picturs=[]
+    for f in files:
+        file_path = os.path.join(path, f)
+        if os.path.isdir(root_dir+file_path):
+            folders.append(file_path)
+        else:
+            img_type = imghdr.what(root_dir+file_path)
+            if img_type in ["jpg", "jpeg","png","gif"]:
+               picturs.append(file_path)
+            
+    return render_template('gallery.html', folders = folders,
+                           files=picturs)
 
 # main function
 if __name__ == '__main__':

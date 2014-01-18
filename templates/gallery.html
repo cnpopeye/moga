@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+   {% for f in folders %}
+<a href="/gallery/{{f}}">
+        <img height=64 width=64 alt="{{f}}" src="../static/img/folder.png" class="img-thumbnail">{{t}}</img>
+</a>
+  {% endfor %}
+
+
+    {% for f in files %}
+<a href="/static/Photos/{{f}}">
+    <img height=128 width=128 src="/static/Photos/{{f}}" class="img-thumbnail">
+</a>
+
+  {% endfor %}
+
+{% endblock %}
